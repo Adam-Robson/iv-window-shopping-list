@@ -1,28 +1,18 @@
-export async function renderContainer(grocery, handleDelete) {
-  const container = document.createElement('section');
-  container.classList.add('container');
+export function renderShoppingList(item, handleUpdate) {
+    const div = document.createElement('div');
 
-  const listItem = document.createElement('div');
-  listItem.classList.add('list-item');
-  listItem.textContent = grocery.name;
+    const p = document.createElement('p');
+    p.textContent = `${item.quantity} ${item.item}`;
 
-  const quantityItem = document.createElement('span');
-  quantityItem.classList.add('quantity');
-  quantityItem.textContent = grocery.quantity;
+    if (item.bought) {
+        p.classList.add('bought');
+    } else {
+        p.style.cursor = 'pointer';
+        p.addEventListener('click', async () => {
+            await handleUpdate(item);
+        });
+    }
 
-  const inputItem = document.createElement('input');
-  inputItem.type.add('checkbox');
-  grocery.bought === true ?
-    inputItem.checkbox === 'checked' :
-    inputItem.checkbox !== 'checked';
-
-  const deleteButton = document.createElement('button');
-  deleteButton.classList.add('deleteButton');
-  deleteButton.textContent = 'delete';
-  deleteButton.addEventListener('click', () => {
-    handleDelete(grocery);
-  });
-
-  container.append(listItem, quantityItem, inputItem, deleteButton);
-  return container    
+    div.append(p);
+    return div;
 }

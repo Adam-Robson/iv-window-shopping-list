@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <link rel="icon" type="image/x-icon" href="./assets/icon.png" />
+  <link rel="stylesheet" href="./style/reset.css" />
+  <link rel="stylesheet" href="./style/global.css" />
+  <title>window shopping list</title>
+</head>
+
+<body>
+  
+    <header class="page-header">
+        <img class="logo" src="./assets/icon.png">
+        <p class="title">window shopping list</p>
+        <nav>
+            <a id="sign-out-link" href="./auth/auth.html">sign out</a>
+        </nav>
+    </header>
+
+    <main>
+
+      <article id="controls">
+        <form class="add-item-form">
+          <input name="item" id="list-item-input" placeholder="enter item..." required />
+          <input name="quantity" id="quantity-item-input" type="number" placeholder="#" required />
+          <button id="add-button">add</button>
+        </form>
+          <button id="delete-button">delete</button>
+      </article>
+
+      <article id="list-wrapper"></article>
+
+      
+    </main>
+ 
+    <footer>
+      on a sunny day look for an apex 
+        <br /> 
+      of the big blue sky; infinity.
+    </footer>
+
+  <script type="module" src="./src/index.js"></script>
+</body>
+</html>
