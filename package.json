@@ -1,0 +1,31 @@
+{
+  "name": "iv-window-shopping-list",
+  "version": "1.0.0",
+  "description": "window shopping list",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adam-Robson/iv-window-shopping-list.git"
+  },
+  "keywords": [
+    "vanilla",
+    "js",
+    "supabase"
+  ],
+  "author": "adam robson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adam-Robson/iv-window-shopping-list/issues"
+  },
+  "homepage": "https://github.com/Adam-Robson/iv-window-shopping-list#readme",
+  "devDependencies": {
+    "jest": "^29.3.1",
+    "markdownlint": "^0.26.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.2.2"
+  }
+}
