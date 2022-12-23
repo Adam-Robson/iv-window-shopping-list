@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js'
 
 const SUPABASE_URL = 'https://fjidvhxajekcfrrjsnla.supabase.co';
@@ -37,42 +36,53 @@ export async function signingOut() {
   return checkError(res);
 }
 
+export function checkAuth() {
+  const user = fetchUser();
+  if (!user) {
+    //  set the path to auth based on possible locations user may originate
+    const authLocation = location.pathname === '/' ? './auth/' : '../auth/';
+    //  after auth user is returned to wherever they started
+    location.replace(`${authLocation}?redirectURL=${encodeComponentURI(location)}`);
+  }
+  return user;
+}
+
+
 //  DATA
 //  CRUD
 
-export async function createItem() {
-const res = await client
-  .from('shopping')
-  .insert([
-    { name, 
+export async function createItem(name, bought, quantity) {
+  const res = await client
+    .from('shopping')
+    .insert({ 
+      name, 
       bought, 
       quantity
-    },
-  ]);
-  return checkError(res);
+      });
+    return checkError(res);
 }
 
 export async function fetchItems() {
-const res = await client
-  .from('shopping')
-  .select('*');
-  return checkError(res);
-}
-
-export async function upsertItem() {
   const res = await client
-  .from('shopping')
-  .insert([{ bought: true }], { upsert: true })
-  .match({ id })
-  .single();
-  return checkError(res);
+    .from('shopping')
+    .select('*');
+    return checkError(res);
 }
 
-export async function deleteItem() {
+export async function upsertItem(id, _bought) {
+  const res = await client
+    .from('shopping')
+    .insert({ bought: true }, { upsert: true })
+    .match({ id })
+    .single();
+    return checkError(res);
+}
+
+export async function deleteItem(id) {
   const res = await client
     .from('shopping')
     .delete()
-    .match({ name })
+    .match({ id })
     .single()
     return checkError(res);
 }
