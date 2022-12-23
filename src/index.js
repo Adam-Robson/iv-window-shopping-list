@@ -2,15 +2,14 @@ import { signingOut, checkAuth, createItem, fetchItems, upsertItem, deleteItems 
 
 import { renderContainer } from './render-utils';
 
-const user = checkAuth();
+checkAuth();
 
 const signOutLink = document.createElement('sign-out-link');
 signOutLink.addEventListener('click', signingOut);
 
 const listWrapper = document.getElementById('list-wrapper');
-const listItemInput = document.getElementById('list-item-input');
-const quantityItemInput = document.getElementById('quantity-item-input');
-const addButton = document.getElementById('add-button');
+const addItemForm = document.getElementById('add-item-form');
+const deleteButton = document.getElementById('delete-button');
 
 addItemForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -19,13 +18,14 @@ addItemForm.addEventListener('submit', async (e) => {
     const item = formData.get('item');
     const quantity = formData.get('quantity');
     
-    const response = await createItem(name, quantity);
+    const response = await createItem(item, quantity);
     
     addItemForm.reset();
     
     const error = response.error;
     
     if (error) {
+        /* eslint-disable no-console */
         console.log(error.message);
     } else {
         displayList();
@@ -40,6 +40,7 @@ async function handleUpdate(item) {
     };
     const response = await upsertItem(item.id, update);
     if (response.error) {
+        /* eslint-disable no-console */
         console.log(response.error);
     } else {
         const bought = response.data;
@@ -57,7 +58,7 @@ async function displayList() {
 
     for (let item of items) {
         const renderedItems = renderContainer(item, handleUpdate);
-        listDiv.append(renderedItems);
+        listWrapper.append(renderedItems);
     }
 }
 
@@ -78,5 +79,3 @@ deleteButton.addEventListener('click', async () => {
     }
     displayList();
 });
-
-

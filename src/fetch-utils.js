@@ -55,5 +55,6 @@ export async function deleteAllItems() {
 }
 
 function checkError({ data, error }) {
+    /* eslint-disable no-console */
     return error ? console.error(error) : data;
 }
